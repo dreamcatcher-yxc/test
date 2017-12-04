@@ -1,0 +1,74 @@
+/**
+ * 为上下文环境为 project
+ *
+ * Gradle 默认在 src/main/java 目录下寻找到你的正式（生产）源码, 在 src/test/java 目录下
+ * 寻找到你的测试源码, 并在src/main/resources目录下寻找到你准备打包进jar的资源文件。测
+ * 试代码会被加入到环境变量中设置的目录里运行。所有的输出文件都会被创建在构建目录里,
+ * 生成的JAR文件会被存放在 build/libs 目录下.
+ *
+ * 可以使用 gradle tasks 获取该插件所定义的所有的任务信息。
+ *
+ * 部分任务解释:
+ * clean: build 目录所有有用为 build 生成的文件.
+ *
+ * assemble
+ * 编译并打包你的代码, 但是并不运行单元测试.其他插件会在这个任务里加入更多的步骤.举个
+ * 例子,如果你使用 War 插件,这个任务还将根据你的项目生成一个 WAR 文件.
+ *
+ * check
+ * 编译并测试你的代码. 其他的插件会加入更多的检查步骤.举个例子, 如果你使用 checkstyle 插
+ * 件, 这个任务将会运行 Checkstyle 来检查你的代码.
+ *
+ * 可以使用 gradle properties 查看系统所有的属性, 以及它们的默认值。
+ *
+ * */
+apply plugin: 'java'
+def sourceCompatibility = 1.8
+def title = "Gradle demo01"
+def version = '1.0.0'
+def author = 'yangxiuchu'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': title, 'Implementation-Version' : version
+    }
+}
+
+/**
+ * 在测试阶段加入一个系统属性
+ */
+test {
+    systemProperties 'authpr': author
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile "junit:junit:4.11"
+}
+
+
+/**
+ * 元信息
+ * println "name: ${project.name}"
+ * println "description: ${project.description}"
+ * println "projectDir: ${project.projectDir}"
+ * println "build: ${project.build}"
+ * println "group: ${project.group}"
+ * println "vesion: ${project.version}"
+ * */
+
+/**
+ * 发布 jar 文件.
+ * 运营 gradle uploadArchives 发布 jar 包.
+ * */
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs 'repos'
+        }
+    }
+}
+

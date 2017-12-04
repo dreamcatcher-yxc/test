@@ -1,0 +1,74 @@
+// 第一个例子
+// task hello {
+// 		doLast {
+// 			println 'hello world!'
+// 		}
+// }
+
+// afterHelloRun 任务执行之前需要先执行 hello
+// task hello << {
+// 	String name = 'yangxiuchu'
+// 	println 'origin: ' + name
+// 	println 'Upper case: ' + name.toUpperCase()
+// }
+
+// task afterHelloRun(dependsOn: hello) << {
+// 	println 'task hello finish...'
+// }
+
+// 动态创建任务.
+// 4.times { counter ->
+// 	task "task$counter" << {
+// 		println "I'm task number $counter"
+// 	}
+// }
+// task0.dependsOn task2, task3
+
+
+// doFirst、doLast 表示列表开始或者结束需要执行的任务, 可以被执行很多次, << 是 doLast 的别称
+// task hello {
+// 	ext.desc = 'just a test!'
+// 	println 'task running...'
+// }
+
+// hello.doFirst {
+// 	println 'before task running...'
+// }
+
+// hello.doLast {
+// 	println 'after task running...'
+// }
+
+// hello << {
+// 	// 使用双引号, $hello.name 为任务 hello 的名称.
+// 	println "end of $hello.name running..."
+// }
+
+// // 读取 hello 任务的 desc 属性(自定义)
+// task otherTask {
+// 	println hello.desc
+// }
+
+
+// 默认任务
+// 在一个多任务的项目中, 每一个子项目可以有它默认执行的子任务, 如果没有, 则会执行父项目的默认任务.
+//defaultTasks 'clean', 'run'
+//
+//task clean {
+//	println 'run cleaning'
+//}
+//
+//task run {
+//	println 'running...'
+//}
+//
+//task other {
+//	println 'run testing...'
+//}
+
+// 使用方法.
+def foo = {name -> println "hello: $name"}
+
+task runFoo << {
+	foo '杨秀初'
+}

@@ -1,43 +1,74 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+target/
+!.mvn/wrapper/maven-wrapper.jar
 
-# Folder config file
-Desktop.ini
+### STS ###
+.apt_generated
+.classpathtarget/
+!.mvn/wrapper/maven-wrapper.jar
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+**/application-lcl.properties
+.mvn
+/mvnw.cmd
+/mvnw
+target/
 
-# Windows shortcuts
-*.lnk
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
-# =========================
-# Operating System Files
-# =========================
+/target
+/*.iml
+!/ompServer/src/main/resources/application-lcl.properties
+/ompServer/src/main/resources/templates/settlement/simulate.ftl
+/ompServer/src/main/resources/templates/settlement/test.ftl
+/ompServer/src/main/resources/application-lcl.properties
 
-# OSX
-# =========================
+.factorypath
+.project
+.settings
+.springBeans
 
-.DS_Store
-.AppleDouble
-.LSOverride
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+**/application-lcl.properties
+.mvn
+/mvnw.cmd
+/mvnw
+target/
 
-# Thumbnails
-._*
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
+/target
+/*.iml
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+### Gradle ###
+.gradle
+.gradle
+.gradle
+/water/.gradle
