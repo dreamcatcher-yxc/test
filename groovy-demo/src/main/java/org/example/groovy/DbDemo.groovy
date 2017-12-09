@@ -9,7 +9,7 @@ import groovy.sql.Sql
 class DbDemo {
     private static SQL;
     static  {
-        SQL = Sql.newInstance('jdbc:mysql://localhost:3306/test?useSSL=false', 'root', '123456', 'com.mysql.jdbc.Driver');
+        SQL = Sql.newInstance('jdbc:mysql://localhost:3306/fieldPoitionTest?useSSL=false', 'root', '123456', 'com.mysql.jdbc.Driver');
     }
 
     static void simpleTest() {

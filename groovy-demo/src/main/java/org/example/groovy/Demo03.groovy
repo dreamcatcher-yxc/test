@@ -49,7 +49,7 @@ class Demo03 {
         HTTPBuilder http = new HTTPBuilder('http://localhost:9096');
         http.request( GET, TEXT ) {
             println it;
-            url.path = '/test/editableTable/'
+            url.path = '/fieldPoitionTest/editableTable/'
 //            url.query = [] // get 方式使用此方式配置参数。
 //            body = [] // post 方式使用此方式配置参数。
             headers.'User-Agent' = 'Mozilla/5.0 Ubuntu/8.10 Firefox/3.0.4'

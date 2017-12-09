@@ -1,0 +1,44 @@
+import java.lang.reflect.Field
+import java.lang.reflect.Method
+import java.util.*
+
+task getName << {
+  println "project name: ${project.name}"
+}
+
+// 文件拷贝任务
+task copy(type: Copy) {
+  from 'source'
+  into 'dest'
+  include('**/*.properties')
+}
+
+task showDeleget << {
+}
+
+/*遍历 project 中的所有属性*/
+task eachProject << {
+  project.class.declaredFields.each { Field field -> println field.name}
+  println '*' * 30
+  project.class.declaredMethods.each {Method method -> println method.name}
+}
+
+Properties initProps() {
+  Properties properties = new Properties()
+  properties.load(new FileInputStream("${project.projectDir}/source/config.properties"))
+  println '配置文件加载完成!!!'
+  return properties;
+}
+
+// 加载配置文件, 并且列举出所有的配置信息
+task loadProps {
+  doFirst {
+    try {
+      Properties prop = initProps();
+      prop.keySet().each {println "key: ${it}, value: ${prop.get(it)}"}
+      inputs
+    } catch (Exception e) {
+      println "cause: ${e.cause}, message: ${e.message}"
+    }
+  }
+}

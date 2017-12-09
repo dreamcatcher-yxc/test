@@ -1,0 +1,18 @@
+/**
+ * war 依赖会添加 providedCompile 和 providedRuntime 两种配置，类似于 compile 和 runtime 配置,
+ * 都是参与配置, 但是不会将相关的依赖添加到生成的 war 包中。
+ */
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.akhikhl.gretty' version '1.4.2'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    testCompile 'junit:junit:4.12'
+}

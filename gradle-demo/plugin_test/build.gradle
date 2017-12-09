@@ -1,0 +1,21 @@
+apply plugin:'java'
+apply plugin: 'maven-publish'
+
+task generateJar(type: Jar) {}
+
+// 可以使用 publishToMavenLocal 将 jar 包发布到本地仓库。
+publishing {
+    repositories {
+        maven {
+            url "$buildDir/repo"
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.example'
+            artifactId 'plugin_test'
+            version '1.0.0'
+            artifact generateJar
+        }
+    }
+}

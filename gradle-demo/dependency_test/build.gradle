@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+buildscript {
+    repositories {
+        jcenter();
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
+}
+
+jar {
+    baseName = 'com.example.denpendencytest'
+    version =  '1.0.0'
+}
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("io.springfox:springfox-swagger2:2.7.0")
+    //compile("io.springfox:springfox-data-rest:2.7.0")
+    compile("com.google.guava:guava:23.5-jre")
+    compile("io.springfox:springfox-swagger-ui:2.7.0")
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    /*spring boot 监控, 不使用*/
+//    compile("org.springframework.boot:spring-boot-starter-actuator")
+    testCompile("junit:junit")
+}
+
+task listJars {
+    doLast {
+        configurations.compile.each { File file -> println file.name }
+    }
+}

@@ -1,0 +1,46 @@
+/*
+  Closure cl = { task -> println "I'm $task.project.name" }
+
+  // 声明根目录的任务
+  task('hello').doLast(cl)
+
+  // 声明 bluewhale 项目的任务
+  // 使用 project 可以实现跨项目定义任务
+  project(':bluewhale') {
+      task('hello').doLast(cl)
+  }
+*/
+
+// 访问所有的项目的任务
+allprojects {
+    task hello {
+        doLast { task ->
+            println "I'm $task.project.name"
+        }
+    }
+}
+
+// 仅仅访问子项目的任务
+subprojects {
+    hello {
+        doLast {
+            println "- I depend on water"
+        }
+        afterEvaluate { Project project ->
+            if (project.arctic) { doLast {
+                println '- I love to spend time in the arctic waters.' }
+            }
+        }
+    }
+}
+
+// 通常情况下我们可以直接在构建脚本(build.gradle)文件里面配置特殊的配置, 我们可以不使用前面的方式, 用下面的方式进行特殊配置。
+/*
+project(':bluewhale').hello {
+  doLast {
+    println "- I'm the largest animal that has ever lived on this planet."
+  }
+}
+*/
+
+// 但是上面这种方式是不常用的.

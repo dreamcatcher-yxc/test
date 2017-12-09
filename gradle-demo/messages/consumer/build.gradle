@@ -1,0 +1,14 @@
+/**
+ * 声明 consumer 依赖于 producer
+ * 可以使用下面的方式获取 mmessages/build.gradle 中定义的 producerMessage 扩展属性。
+ * evaluationDependsOn 用于指定 consumer/build.gradle 在执行之前必须先执行 producer/build.gradle
+ * */
+evaluationDependsOn(':producer')
+def message = rootProject.producerMessage;
+
+task action(dependsOn: ":producer:action") {
+    doLast {
+//        println("Consuming message: ${rootProject.producerMessage}")
+        println "Consuming message: $message"
+    }
+}

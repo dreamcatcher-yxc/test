@@ -1,0 +1,1 @@
+include 'build_script_test', 'messages', 'water', 'webdemo', 'plugin_test', 'dependency_test'
