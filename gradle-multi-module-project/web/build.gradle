@@ -1,0 +1,21 @@
+//buildscript {
+//    repositories {
+//        jcenter();
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${rootProject.GLOBAL_CONST['springboot.version']}")
+//    }
+//}
+
+jar {
+    manifest {
+        attributes('Main-Class':'Application')
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    runtime project(':test-api')
+}

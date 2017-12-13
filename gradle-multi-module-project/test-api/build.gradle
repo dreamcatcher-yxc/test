@@ -1,0 +1,8 @@
+//group 'org.yxc'
+//version '1.0.0'
+
+task listJars {
+    doLast {
+        configurations.compile.each { File file -> println file.name }
+    }
+}
