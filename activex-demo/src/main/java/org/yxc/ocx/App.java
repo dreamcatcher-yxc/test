@@ -27,7 +27,7 @@ public class App
         String clsId3 = "clsid:4364f170-81a9-11ce-9c32-00aa0051e517";
         String programId = "CID7000ID.CID7000idCtrl.1";
 //        ActiveXComponent com = ActiveXComponent.createNewInstance(clsId1);
-        ActiveXComponent com = new ActiveXComponent(programId);//在MyOcx中搜索ProgID = s 'MyOcx.MyDialog.1'
+        ActiveXComponent com = new ActiveXComponent("Word.Application1");//在MyOcx中搜索ProgID = s 'MyOcx.MyDialog.1'
         // Dispatch对象看成是对Activex控件的一个操作
         Dispatch disp = (Dispatch) com.getObject();
         // 假设MsgBox是MyOcx.dll中的一个方法
