@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.yxc.ocx</groupId>
+    <artifactId>activex-demo</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>activex-demo</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--jacob(支持使用 Java 创建支持 COM 规范的对象, 这里可以用于调用 activeX 对象, 因为 activeX 遵循 COM 规范)-->
+       <!-- <dependency>
+            <groupId>net.sf.jacob-project</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.14.3</version>
+        </dependency>-->
+
+        <!--winx64 系统所需动态链接库-->
+        <!--<dependency>
+            <groupId>net.sf.jacob-project</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.14.3</version>
+            <classifier>x64</classifier>
+            <type>dll</type>
+        </dependency>-->
+
+        <!--winx86 系统所需动态链接库-->
+       <!-- <dependency>
+            <groupId>net.sf.jacob-project</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.14.3</version>
+            <classifier>x86</classifier>
+            <type>dll</type>
+        </dependency>-->
+    </dependencies>
+</project>
