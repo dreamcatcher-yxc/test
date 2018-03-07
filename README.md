@@ -4,5 +4,7 @@
 - groovy-demo: groovy 学习示例代码, 教程见 *w3cschool*
 - webservice: webservice 相关学习示例代码
 - nockito: java 测试框架学习示例代码.
-- activex-demo: 使用 jacob 调用windows dll 文件, 未成功, 留在这里做个例子吧.
+- activex-demo: 使用 jacob 调用windows dll 文件, 未成功, 留在这里做个例子.
+- big-data: 大数据学习相关 demo 代码.
+- spring-boot-integrate-technology-demo: spring-boot 集成相关技术测试 Demo.
 > 问题: gradle-multi-module-project 打包成 jar 包之后无法启动, 待解决。
