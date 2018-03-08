@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>设置属性值</title>
+</head>
+<body>
+    <fieldset>
+        <legend>设置属性值</legend>
+        <form th:action="@{~/submit}" th:object="${user}" method="POST">
+            Username: <input type="text" th:value="*{username}"><br>
+            Password: <input type="text" th:value="*{username}"><br>
+            <input type="submit" value="提交">
+        </form>
+        <!--同时设置两个属性的值-->
+        <img th:alt-title="'/aaaa'">
+    </fieldset>
+
+    <fieldset>
+        <legend>th:attrappend 和 th:attrprepend 的使用</legend>
+        <p class="btn" th:attrappend="class='-success'">th:attrappend</p>
+        <p class="success" th:attrprepend="class='btn-'">th:attrprepend</p>
+    </fieldset>
+
+    <fieldset>
+        <legend>固定值的布尔属性</legend>
+        <!--false 的时候 checked 属性将不会被设置-->
+        <input type="checkbox" name="active" th:checked="false" />
+    </fieldset>
+
+    <fieldset>
+        <legend>设置其他属性的值（默认属性处理器）</legend>
+        <span th:whatever="'heheda'"></span>
+    </fieldset>
+</body>
+</html>

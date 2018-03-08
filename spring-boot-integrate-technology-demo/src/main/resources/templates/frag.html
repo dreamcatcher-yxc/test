@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <head th:replace="fragments/common:: common_header(~{::title},~{::link})">
+        <title>模板布局测试</title>
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/themes/smoothness/jquery-ui.css}">
+    </head>
+</head>
+<body>
+    <div th:fragment="inner">
+        this is a inner fragment!!!;
+    </div>
+    <!--应用当前页面中的片段-->
+    <div th:replace="~{this::inner}"></div>
+    <div th:replace="~{::inner}"></div>
+
+    <div th:replace="~{fragments/copy::copy}"></div>
+    <div th:replace="~{fragments/copy::#special-message}"></div>
+</body>
+</html>

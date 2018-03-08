@@ -4,152 +4,18 @@
       layout:decorate="layout">
 <head>
     <title>导航页面</title>
-    <!--导入样式-->
-    <link rel="stylesheet" type="text/css" media="all"th:href="@{/static/style/common.css}" />
 </head>
 <body>
-    <fieldset>
-        <legend>获取文本数据</legend>
-        <b th:text="${username}"></b>
-    </fieldset>
-
-    <fieldset>
-        <legend>获取消息(messages.properties)</legend>
-        <b th:text="#{home.welcome}"></b>
-    </fieldset>
-
-    <fieldset>
-        <legend>获取各个作用域中的数据</legend>
-        <b th:text="${param.username}">获取请求参数</b>
-        <br/>
-        <b th:text="${session.username}">获取会话中的数据</b>
-        <br/>
-        <b th:text="${application.username}">获取servletContext中的属性</b>
-    </fieldset>
-
-    <fieldset>
-        <legend>带标签的数据转义问题</legend>
-        <!--直接使用 th:text 会导致标签被转义-->
-        <p th:text="#{home.tag.message}"></p>
-        <!--使用 th:utext 可以解决上述的问题-->
-        <p th:utext="#{home.tag.message}"></p>
-    </fieldset>
-
-    <!--
-        变量表达式：$ {...}
-        选择变量表达式：\* {...}
-        消息表达式：＃{...}
-        链接⽹址表达式：@ {...}
-        ⽚段表达式：〜{...}
-    -->
-    <fieldset>
-        <!--字符串拼接-->
-        <p th:text="|用户名:${username}|"></p>
-    </fieldset>
-
-    <fieldset>
-        <legend>各种表达式嵌套使用</legend>
-        <p th:text="|#{home.welcome}${session.username}|"></p>
-        <p th:text="#{${msgKey}}"></p>
-    </fieldset>
-
-    <fieldset>
-        <legend>OGNL 测试</legend>
-        <p th:text="${user.username}"></p>
-        <p th:text="${user.address}"></p>
-        <p th:text="${user.address.city}"></p>
-        <p th:text="${user['username']}"></p>
-        <p th:text="${user['address']}"></p>
-        <p th:text="${user['address']['city']}"></p>
-        <!--直接调用对象的方法-->
-        <p th:text="${user.getAddress()}"></p>
-    </fieldset>
-
-    <fieldset>
-        <legend>基本的表达式对象</legend>
-        <p th:text="${#locale.country}"></p>
-        <!--使用 messages 获取外部化信息-->
-        <p th:text="${#messages.msg('home.welcome')}"></p>
-        <!--使用 execInfo 获取正在处理的模板信息-->
-        <p th:text="${#execInfo.getTemplateName()}"></p>
-        <!--使用 uris -->
-        <p th:text="${#uris.escapePath('/aaa/bbb?username=zhangsan')}"></p>
-        <!--使用 strings -->
-        <p th:text="${#strings.trim(' aaa ')}"></p>
-    </fieldset>
-
-    <!--
-        在没有使用 th:object 的使用 ${...} *{...} 是可以混用的。
-    -->
-    <fieldset>
-        <legend>使用 * 表达式</legend>
-        <p th:text="|obtain variable by *: *{session.username}|"></p>
-        <p th:text="|obtain variable by $: ${session.username}|"></p>
-        <!--下面的情况只能使用 *{...}-->
-        <div th:object="${session}">
-            <!--相当于 ${session.username}-->
-            <p th:text="*{username}"></p>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>URL 链接处理</legend>
-        <!--将被处理为 /order?orderId=xxx -->
-        <a href="http://www.baidu.com" th:href="@{/order(orderId=${username})}">这是一个链接</a>
-        <!--多个参数使用 , 分隔-->
-        <a th:href="@{${url}(orderId=xxx,lock=1)}">a2</a>
-        <!-- 服务器相对 URL, 可以调用同一个服务器不同上下文下的资源-->
-        <a th:href="@{~/order}">a3</a>
-    </fieldset>
-
-    <fieldset>
-        <legend>字面量</legend>
-        <p th:text="'好好学习，天天向上'"></p>
-        <p th:text="1314520"></p>
-        <p th:text="1314520 * 3"></p>
-    </fieldset>
-
-    <fieldset>
-        <legend>Boolean 类型</legend>
-        <p th:if="${username} ne yangxiuchu">呵呵</p>
-        <p th:if="${session.date} eq null">session 中不存在 date 属性</p>
-    </fieldset>
-
-    <fieldset>
-        <legend>文本符号</legend>
-        <!--<p th:class="content">...</p>-->
-        <p th:class="content">...</p>
-    </fieldset>
-
-    <!--只有 #{} ${} *{} 才能使用文本替换-->
-    <fieldset>
-        <legend>文本追加、文本替换</legend>
-        <p th:text="'username: ' + ${username}"></p>
-        <p th:text="|username: ${username}|"></p>
-    </fieldset>
-
-    <fieldset>
-        <legend>定义局部变量</legend>
-        <div th:with="firstname='杨',lastname='秀初'">
-            <p th:text="|${firstname}${lastname}|"></p>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>默认表达式</legend>
-        <div th:object="${session}">
-            <p th:text="*{age}?:'未知'"></p>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>哑操作符号</legend>
-        <!--<span th:text="${hehe} ?: 'no user authenticated'"></span>-->
-        <span th:text="${hehe} ?: _">no user authenticated</span>
-    </fieldset>
-
-    <fieldset>
-        <legand>预处理</legand>
-    </fieldset>
+<ul>
+    <li>
+        <a th:href="@{~/basic(username='this is parameter username')}">标准表达式语法</a>
+    </li>
+    <li>
+        <a th:href="@{~/attr}">设置属性值</a>
+    </li>
+    <li>
+        <a th:href="@{~/frag}">模板布局</a>
+    </li>
+</ul>
 </body>
 </html>
