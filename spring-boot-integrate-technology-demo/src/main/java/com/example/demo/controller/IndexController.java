@@ -2,15 +2,28 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.User;
+import com.yotexs.settle.external.domain.Foo;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
 public class IndexController {
+    @Value("${app.mq.exchange.name}")
+    private String exchangeName;
+
+    @Value("${app.mq.rk}")
+    private String routingKey;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @RequestMapping
     public String index() {
@@ -63,5 +76,16 @@ public class IndexController {
     @RequestMapping("frag")
     public String fragment() {
         return "frag";
+    }
+
+
+    @RequestMapping("mq")
+    @ResponseBody
+    public String sendMQMsg(String fn, String ln) {
+        Foo foo = new Foo();
+        foo.setFirstName(fn);
+        foo.setLastName(ln);
+        rabbitTemplate.convertAndSend(exchangeName, routingKey, foo);
+        return "ok";
     }
 }
