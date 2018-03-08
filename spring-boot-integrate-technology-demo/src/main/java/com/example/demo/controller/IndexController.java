@@ -2,28 +2,31 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.User;
-import com.yotexs.settle.external.domain.Foo;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
+//import com.yotexs.settle.external.domain.Foo;
+//import org.springframework.amqp.rabbit.core.RabbitTemplate;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.context.LazyContextVariable;
+//import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
 public class IndexController {
-    @Value("${app.mq.exchange.name}")
-    private String exchangeName;
+//    @Value("${app.mq.exchange.name}")
+//    private String exchangeName;
+//
+//    @Value("${app.mq.rk}")
+//    private String routingKey;
 
-    @Value("${app.mq.rk}")
-    private String routingKey;
-
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+//    @Autowired
+//    private RabbitTemplate rabbitTemplate;
 
     @RequestMapping
     public String index() {
@@ -79,13 +82,34 @@ public class IndexController {
     }
 
 
-    @RequestMapping("mq")
-    @ResponseBody
-    public String sendMQMsg(String fn, String ln) {
-        Foo foo = new Foo();
-        foo.setFirstName(fn);
-        foo.setLastName(ln);
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, foo);
-        return "ok";
+//    @RequestMapping("mq")
+//    @ResponseBody
+//    public String sendMQMsg(String fn, String ln) {
+//        Foo foo = new Foo();
+//        foo.setFirstName(fn);
+//        foo.setLastName(ln);
+//        rabbitTemplate.convertAndSend(exchangeName, routingKey, foo);
+//        return "ok";
+//    }
+
+    @RequestMapping("each")
+    public String each(Model model) {
+        model.addAttribute("users", new LazyContextVariable<List<User>>() {
+            protected List<User> loadValue() {
+                System.out.println("加载用户数据...");
+                List<User> users = new ArrayList<>();
+                for(int i = 0; i < 5; i++) {
+                    User user = new User();
+                    user.setUsername("user-" + i);
+                    user.setPassword("pwd-" + i);
+                    user.setPhone((18487304567L + i) + "");
+                    user.setEmail((1905716925L + i) + "@qq.com");
+                    user.setGender(i % 4 == 0 ? "男" : "女");
+                    users.add(user);
+                }
+                return users;
+            }
+        });
+        return "each";
     }
 }

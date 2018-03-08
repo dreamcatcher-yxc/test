@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>遍历</title>
+</head>
+<body>
+<fieldset>
+    <legend>遍历</legend>
+    <!--/*
+        由于后台使用了懒加载，当 users 变量没有被真正使用的时候, 后台是不会加载用户信息的。
+    */-->
+    <table border="1" cellspacing="0" th:if="false">
+        <thead >
+        <tr>
+            <th>编号</th>
+            <th>索引</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>性别</th>
+            <th>电话</th>
+            <th>邮箱</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*
+            如果没有显示的创建，则状态变量为 变量名 + Stat
+        */-->
+        <tr th:each="user,iterStat : ${users}" th:object="${user}" th:data="${iterStat.size}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${iterStat.index}">1</td>
+            <td th:text="*{username}">张三</td>
+            <td th:text="*{password}">xxx</td>
+            <td th:text="*{gender}">男</td>
+            <td th:text="*{phone}">18487307254</td>
+            <td th:text="*{email}">zhangsan@sina.com</td>
+        </tr>
+        </tbody>
+        <tfooter>
+            <!-- <tr>
+                 <td colspan="7"></td>
+             </tr>-->
+        </tfooter>
+    </table>
+</fieldset>
+
+<fieldset>
+    <legend>懒加载</legend>
+
+</fieldset>
+</body>
+</html>
