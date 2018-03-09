@@ -18,7 +18,9 @@ public class Sender01 {
         /**
          * 发送消息
          * durable: 消息是否持久化
-         *
+         * exclusive: 是否在此连接该队列是否被独占
+         * autoDelete: 该队列在断开连接的是否是否自动删除
+         * arguments: 队列的其他属性
          */
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
         for(int i = 1; i <=5; i++) {

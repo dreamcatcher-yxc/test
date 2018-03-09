@@ -23,7 +23,7 @@ public class Receiver01 {
         while (true) {
             QueueingConsumer.Delivery delivery = consumer.nextDelivery();
             String message = new String(delivery.getBody());
-            // 必须确认消息处理完成
+            // 必须确认消息处理完成, multiple 标示是否已经收到的所有消息，false 标示只是收到了刚才接收到这条消息。
             channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
             System.out.println(" [x] Received '" + message + "'");
         }
