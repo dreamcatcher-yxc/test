@@ -112,4 +112,9 @@ public class IndexController {
         });
         return "each";
     }
+
+    @RequestMapping("/form")
+    public String form() {
+        return "form";
+    }
 }

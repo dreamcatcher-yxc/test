@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>测试表单</title>
+</head>
+<body>
+    <form th:action="@{~/rest/users/3}" method="POST">
+        username: <input type="text" name="username"><br/>
+        password: <input type="password" name="password"><br/>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

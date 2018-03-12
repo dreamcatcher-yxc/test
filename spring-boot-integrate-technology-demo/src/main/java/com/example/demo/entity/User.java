@@ -1,12 +1,23 @@
 package com.example.demo.entity;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonView;
 
+public class User {
+    @JsonView(Views.Summary.class)
     private String username;
+
     private String password;
+
+    @JsonView(Views.Detail.class)
     private String gender;
+
+    @JsonView(Views.Summary.class)
     private String email;
+
+    @JsonView(Views.Detail.class)
     private String phone;
+
+    @JsonView(Views.Detail.class)
     private Address address;
 
     public String getUsername() {

@@ -63,6 +63,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--webjars-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+
+		<!--监控-->
+		<!--<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+-->
 		<!-- MQ -->
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
