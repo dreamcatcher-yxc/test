@@ -2,23 +2,47 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="T_USER")
 public class User {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonView(Views.Detail.class)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
     @JsonView(Views.Summary.class)
     private String username;
 
-    private String password;
+    @Column(nullable = false)
+    private String password = "123456";
 
+    @Column(nullable = false)
     @JsonView(Views.Detail.class)
-    private String gender;
+    private String gender = "m";
 
+    @Column(unique = true)
     @JsonView(Views.Summary.class)
     private String email;
 
+    @Column(unique = true)
     @JsonView(Views.Detail.class)
     private String phone;
 
+    @OneToOne(optional=false,cascade=CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id", unique = true)
     @JsonView(Views.Detail.class)
     private Address address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
