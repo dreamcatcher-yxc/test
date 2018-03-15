@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -140,5 +139,10 @@ public class Test01 {
         users.forEach(user -> {
             System.out.println(user);
         });
+    }
+
+    @Test
+    public void test() {
+        repository.findFirstByUsernameIsLike("username");
     }
 }

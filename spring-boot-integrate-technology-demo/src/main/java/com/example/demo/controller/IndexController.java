@@ -19,15 +19,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/")
 public class IndexController {
-//    @Value("${app.mq.exchange.name}")
-//    private String exchangeName;
-//
-//    @Value("${app.mq.rk}")
-//    private String routingKey;
-
-//    @Autowired
-//    private RabbitTemplate rabbitTemplate;
-
     @RequestMapping
     public String index() {
         return "index";
@@ -80,17 +71,6 @@ public class IndexController {
     public String fragment() {
         return "frag";
     }
-
-
-//    @RequestMapping("mq")
-//    @ResponseBody
-//    public String sendMQMsg(String fn, String ln) {
-//        Foo foo = new Foo();
-//        foo.setFirstName(fn);
-//        foo.setLastName(ln);
-//        rabbitTemplate.convertAndSend(exchangeName, routingKey, foo);
-//        return "ok";
-//    }
 
     @RequestMapping("each")
     public String each(Model model) {

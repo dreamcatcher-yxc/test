@@ -55,6 +55,7 @@ nbdist/
 /mvnw.cmd
 /mvnw
 target/
+.ideaDataSources
 
 ### NetBeans ###
 nbproject/private/

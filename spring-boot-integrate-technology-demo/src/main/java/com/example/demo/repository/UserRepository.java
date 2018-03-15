@@ -12,8 +12,20 @@ import java.util.Optional;
 
 public interface UserRepository extends GenericRepository<User, Long> {
 
+    /**
+     * 根据用户名和密码查询用户信息
+     * @param username
+     * @param password
+     * @return
+     */
     Optional<User> findByUsernameAndPassword(String username, String password);
 
+    /**
+     * 根据用户名和密码查询用户信息, 忽略大小写
+     * @param username
+     * @param password
+     * @return
+     */
     Optional<User> findByUsernameAndPasswordAllIgnoreCase(String username, String password);
 
     /**
@@ -25,6 +37,11 @@ public interface UserRepository extends GenericRepository<User, Long> {
      */
     Optional<User> findByAddressCountry(String country);
 
+    /**
+     * 和 Optional<User> findByAddressCountry(String country) 函数代表的意义相同
+     * @param country
+     * @return
+     */
     Optional<User> findByAddress_Country(String country);
 
     /**
@@ -52,4 +69,42 @@ public interface UserRepository extends GenericRepository<User, Long> {
      * @return
      */
     List<User> findByUsernameIsLike(String username, Sort sort);
+
+    /**
+     * 根据用户名模糊查询所有用户信息, 取第一个结果
+     * @param username
+     * @return
+     */
+    Optional<User> findFirstByUsernameIsLike(String username);
+
+    /**
+     * 根据用户名模糊查询所有用户信息, 按照邮箱号倒序排列, 取第一个值
+     * @param username
+     * @return
+     */
+    Optional<User> findTopByUsernameIsLikeByEmailDesc(String username);
+
+    /**
+     * 根据用户名模糊分页查询所有用用户信息, 去除查询结果的前 5 条结果.
+     * @param username
+     * @param pageable
+     * @return
+     */
+    Page<User> findFirst5ByUsernameIsLike(String username, Pageable pageable);
+
+    /**
+     * 根据用户名模糊分页查询所有用用户信息, 去除查询结果的前 3 条结果.
+     * @param username
+     * @param pageable
+     * @return
+     */
+    Page<User> findFirst3ByUsernameIsLike(String username, Pageable pageable);
+
+    /**
+     * 根据用户名模糊分页查询所有用用户信息, 去除查询结果的前 2 条结果.
+     * @param username
+     * @param pageable
+     * @return
+     */
+    List<User> findFirst2ByUsernameIsLike(String username, Pageable pageable);
 }

@@ -7,4 +7,6 @@
 - activex-demo: 使用 jacob 调用windows dll 文件, 未成功, 留在这里做个例子.
 - big-data: 大数据学习相关 demo 代码.
 - spring-boot-integrate-technology-demo: spring-boot 集成相关技术测试 Demo.
+- spring-boot-amqp-demo: spring-boot 集成 amqp 测试.
+
 > 问题: gradle-multi-module-project 打包成 jar 包之后无法启动, 待解决。
