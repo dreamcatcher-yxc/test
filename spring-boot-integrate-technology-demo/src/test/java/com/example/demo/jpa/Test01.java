@@ -11,12 +11,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.data.domain.*;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -25,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 @DataJpaTest
 // 使用真实数据库测试
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
-@Transactional(propagation = Propagation.NOT_SUPPORTED)
+//@Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class Test01 {
 
     @Autowired
@@ -142,7 +141,37 @@ public class Test01 {
     }
 
     @Test
-    public void test() {
-        repository.findFirstByUsernameIsLike("username");
+    public void testComplexQuery01() {
+        Optional<User> userOpt = repository.findFirstByUsernameIsLike("%username%");
+        userOpt.ifPresent(user -> {
+            System.out.println(user);
+        });
+
+        userOpt = repository.findTopByUsernameIsLikeOrderByEmailDesc("%username%");
+        userOpt.ifPresent(user -> {
+            System.out.println(user);
+        });
+    }
+
+    @Test
+    public void testComplexQuery02() {
+        Pageable pi = PageRequest.of(3, 3);
+        Page<User> page = repository.findFirst3ByUsernameIsLike("%username%", pi);
+        System.out.println(page.getContent().size());
+    }
+
+    @Test
+    public void testComplexQuery03() {
+        Pageable pi = PageRequest.of(0, 5);
+        Stream<User> users = repository.findByUsernameIsLike("%username%", pi);
+        users.forEach(user -> {
+            System.out.println(user);
+        });
+    }
+
+    @Test
+    public void testGetId() {
+        User user = repository.getOne(1L);
+        System.out.println(user);
     }
 }

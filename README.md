@@ -8,5 +8,6 @@
 - big-data: 大数据学习相关 demo 代码.
 - spring-boot-integrate-technology-demo: spring-boot 集成相关技术测试 Demo.
 - spring-boot-amqp-demo: spring-boot 集成 amqp 测试.
+- java-features: Java 相关特性学习示例代码.
 
 > 问题: gradle-multi-module-project 打包成 jar 包之后无法启动, 待解决。

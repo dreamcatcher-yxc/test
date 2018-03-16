@@ -5,12 +5,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.lang.Nullable;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
-public interface UserRepository extends GenericRepository<User, Long> {
+public interface UserRepository extends GenericRepository<User, Long>{
+
 
     /**
      * 根据用户名和密码查询用户信息
@@ -82,7 +87,7 @@ public interface UserRepository extends GenericRepository<User, Long> {
      * @param username
      * @return
      */
-    Optional<User> findTopByUsernameIsLikeByEmailDesc(String username);
+    Optional<User> findTopByUsernameIsLikeOrderByEmailDesc(String username);
 
     /**
      * 根据用户名模糊分页查询所有用用户信息, 去除查询结果的前 5 条结果.
@@ -107,4 +112,13 @@ public interface UserRepository extends GenericRepository<User, Long> {
      * @return
      */
     List<User> findFirst2ByUsernameIsLike(String username, Pageable pageable);
+
+    /**
+     * 根据用户名模糊分页查询用户信息, 返回流对象(必须加上 read-only 的事务支持)。
+     * @param username
+     * @param pageable
+     * @return
+     */
+    @Transactional(readOnly = true)
+    Stream<User> findByUsernameIsLike(String username, Pageable pageable);
 }

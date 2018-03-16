@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.User;
-import com.sun.deploy.net.HttpResponse;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
