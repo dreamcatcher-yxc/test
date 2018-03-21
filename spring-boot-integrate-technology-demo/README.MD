@@ -5,4 +5,5 @@
     - com.example.demo.jpa.Test02: Spring-data-jpa 自定义 Repository 实现测试代码.
     - com.example.demo.querydsl.Test01: Spring-data-jap + QueryDSL 查询测试(单表查询)
     - com.example.demo.querydsl.Test02: Spring-data-jap + QueryDSL 查询测试(多表查询)
+    - com.example.demo.querydsl.Test02: Spring-data-jap + QueryDSL 查询测试(多表查询)
  
