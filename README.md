@@ -11,5 +11,6 @@
 - java-features: Java 相关特性学习示例代码.
 - java-nio-netty: netty 框架学习相关实例代码.
 - spring-security-demo: spring-security 学习简单示例.
+- spring-security-integration-demo: spring-security 各种方式安全验证示例.
 
 > 问题: gradle-multi-module-project 打包成 jar 包之后无法启动, 待解决。

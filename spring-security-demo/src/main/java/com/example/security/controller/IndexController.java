@@ -2,29 +2,30 @@ package com.example.security.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
 public class IndexController {
 
-    @RequestMapping("/index")
+    @GetMapping("/index")
     public String index() {
         return "index";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "/login";
     }
 
-    @RequestMapping("/logout-success")
+    @GetMapping("/logout-success")
     public String logout() {
         System.out.println("invoke logout method...");
         return "/logout-success";
     }
 
-    @RequestMapping("/login-error")
+    @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
