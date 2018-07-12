@@ -18,7 +18,7 @@ public class PermissionTest03 extends BaseTest {
     }
 
     @Test(expected = UnauthorizedException.class)
-    public void testCheckPermission () {
+    public void testCheckPermission01 () {
         login("classpath:shiro-permission.ini", "zhang", "123");
         //断言拥有权限：user:create
         subject().checkPermission("user:create");
@@ -28,4 +28,20 @@ public class PermissionTest03 extends BaseTest {
         subject().checkPermissions("user:view");
     }
 
+    @Test
+    public void testCheckPermission02 () {
+        login("classpath:shiro-permission.ini", "zhang", "123");
+        subject().checkPermissions("system:user:update", "system:user:delete");
+        // * 代表的是通配符.
+        subject().checkPermissions("system:user:*");
+        subject().checkPermissions("system:user:aaa");
+        subject().checkPermissions("system:user");
+    }
+
+    @Test
+    public void testCheckPermission03 () {
+        login("classpath:shiro-permission.ini", "li", "123");
+        subject().checkPermissions("user:view", "system:user:view");
+//        subject().checkPermissions("system:user:update");
+    }
 }
