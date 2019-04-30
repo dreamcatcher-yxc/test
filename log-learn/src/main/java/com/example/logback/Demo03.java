@@ -134,4 +134,94 @@ public class Demo03 {
         logger2.info("logger2");
         logger3.info("logger3");
     }
+
+    /**
+     * <h2>Appender 的配置</h2>
+     * <p>
+     *     &lt;appender&gt; 包含如下属性:
+     *     <ul>
+     *         <li>name: 名称</li>
+     *         <li>class: appender 实现类</li>
+     *     </ul>
+     *     &lt;appender&gt; 可包含如下子元素:
+     *      <ul>
+     *         <li>layout: 0 ~ n 个</li>
+     *         <li>encoder: 0 ~ n 个</li>
+     *         <li>filter: 0 ~ n 个</li>
+     *     </ul>
+     *     除了上述的三个公共属性之外, &lt;appender&gt; 内部还可以包含任意多个和 JavaBean 合法属性同名的元素.
+     *     支持 logback 组件给定的任意属性是 Joran 强大特性之一, pic3.png 展示 appender 组件常见的结构<br/>
+     *     <strong>注意: logback 组件支持的属性在类中是不可见的</strong>
+     * </p>
+     *
+     * <p>
+     *     &lt;layout&gt; 必须包含 <strong>class</strong> 属性, 该属性指定了 &lt;layout&gt; 实例的类路径,
+     *     与 &lt;appender&gt; 元素类似, 其可以包含任意多个与其具体实例属性同名的子元素. 由于 &lt;layout&gt;
+     *     的配置一般一样, 如果  &lt;layout&gt; 对应的类为 PatternLayout, 则 &lt;layout&gt; 可以省略, 具体
+     *     参看 pic4.png(默认类对应规则).
+     * </p>
+     *
+     * <p>
+     *     &lt;encoder&gt; 必须包含 <strong>class</strong> 属性, 该属性指定了 &lt;encoder&gt; 实例的类路径,
+     *     与 &lt;appender&gt; 元素类似, 其可以包含任意多个与其具体实例属性同名的子元素. 由于 &lt;encoder&gt;
+     *     的配置一般一样, 如果  &lt;encoder&gt; 对应的类为 PatternLayoutEncoder, 则 &lt;encoder&gt; 可以省略, 具体
+     *     参看 pic4.png(默认类对应规则).
+     * </p>
+     *
+     * <p>
+     *     我们可以通过定义多个 appender, 然后将日志记录通过多个不同的 appender 实现打印到不同的地方, 下面是一个简单的实现例子:
+     * </p>
+     *
+     *
+     */
+    @Test
+    public void test08() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-08.xml");
+        Logger logger = LoggerFactory.getLogger("com.example.logback.Demo03");
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>Appender accumulate(累加)</h2>
+     * <p>
+     *     在默认情况下: 则 logger 打印的日志不仅仅会打印到自己种 appender 中, 同时其祖先的 appender 中也会打印出来, 因此, 如果在一个继承体系中
+     *     如果存在多个相同 appender 引用, 则打印的日志内容可能会重复.
+     * </p>
+     */
+    @Test
+    public void test09() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-09.xml");
+        Logger logger = LoggerFactory.getLogger("chapters.configuration");
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <p>
+     *     Demo03.test09() 中描述的问题并非是 logback 的 bug, 而是其提供的一个方便的日志打印特性.
+     *     通过 Demo03.test09() 中介绍的特性, 我们可以实现将所有的日志打印到命令行, 而将我们期望保存
+     *     的日志打印到特定的历史文件中保存, 如下是一个具体的例子.
+     * </p>
+     */
+    @Test
+    public void test10() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-10.xml");
+        Logger logger = LoggerFactory.getLogger("chapters.configuration");
+        Logger logger2 = LoggerFactory.getLogger("foo");
+        logger.debug("hello world!");
+        logger2.debug("hello world2!");
+    }
+
+    /**
+     * 如果我们不希望 appender accumulate 特性被使用到 logger 上, 可以通过配置 additivity="false" 屏蔽
+     * 这一默认行为, 如下的例子中 hello world! 会被打印到名称为 foo.log 的日志文件中, hello world2! 会被
+     * 打印到命令行.
+     */
+    @Test
+    public void test11() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-11.xml");
+        Logger logger = LoggerFactory.getLogger("chapters.configuration");
+        Logger logger2 = LoggerFactory.getLogger("foo");
+        logger.debug("hello world!");
+        logger2.debug("hello world2!");
+    }
 }

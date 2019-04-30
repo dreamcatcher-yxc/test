@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Configuration 中创建了两个 Appender, 名称分别为 FILE 和 STDOUT
+-->
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener" />
+
+    <!--
+        如下的 Appender 表示将日志打印到一个名称为 myApp.log 的文件中, 输出的内容有包括:
+        date, level, thread name, logger name, file name, line number, message
+    -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>myApp.log</file>
+
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+         如下的 Appender 表示将日志打印到控制台, 输出的内容有包括:
+         date, level, thread name, logger name, file name, line number, message
+    -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+        根 logger 指定了日志打印级和打印位置.
+    -->
+    <root level="debug">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!--
+        需要注意的是, 每个 appender 都应该定义其自己的 encoder, 不同 appender 之间的 encoder 是共享的,
+        logback 不提供任何语法支持不同 appender 之间的 encode 共享.
+    -->
+</configuration>
