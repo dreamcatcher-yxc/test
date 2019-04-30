@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 配置名称为 chapters.configuration 的 logger 日志级别为 INFO  -->
+    <logger name="chapters.configuration" level="INFO"/>
+    <!-- 如果希望名称为 chapters.configuration.Foo 的 logger 的日志级别不继承于名称为 chapters.configuration 的日志级别, 我们可以通过如下的方式设置  -->
+<!--    <logger name="chapters.configuration.Foo" level="DEBUG"/>-->
+
+    <!-- 配置 root 日志级别为 debug, 既当 logger 不是名称为 chapters.configuration 或者其子 logger 的时候, 默认 logger 的日志级别为 debug 级别 -->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

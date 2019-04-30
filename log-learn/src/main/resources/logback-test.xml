@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    开启调试模式, 既当次配置文件被使用的时候, 会打印出日志系统当前的内部状态.
+    相当于添加了一个 StatusListener, 用于监听该配置文件的解析状态
+
+-->
+<configuration debug="true">
+    <!--StatusListener 如果配置, 建议在最前面.-->
+<!--    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

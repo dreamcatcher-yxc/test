@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    debug=true, 开启调试模式, 既当次配置文件被使用的时候, 会打印出日志系统当前的内部状态.
+    相当于添加了一个 StatusListener, 用于监听该配置文件的解析状态
+
+-->
+<configuration>
+    <!--
+    StatusListener 如果配置, 建议在最前面, 如果我们希望使用代码的方式配置, 则可以使用下面的方式:
+
+       LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+       StatusManager statusManager = lc.getStatusManager();
+       OnConsoleStatusListener onConsoleListener = new OnConsoleStatusListener();
+       statusManager.add(onConsoleListener);
+
+    除此之外, 还可以通过设置 java 环境变量的方式配置:
+        java -Dlogback.statusListenerClass=ch.qos.logback.core.status.OnConsoleStatusListener ...
+    -->
+
+    <!--
+        ch.qos.logback.core.status.OnConsoleStatusListener: 使用 System.out 输出状态信息
+        ch.qos.logback.core.status.OnErrorConsoleStatusListener: 使用 System.error 输出状态信息
+        ch.qos.logback.core.status.NopStatusListener: 不打印输出的状态信息
+    -->
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

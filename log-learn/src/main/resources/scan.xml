@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   scan: true 在项目启动之后，会自动创建 ReconfigureOnChangeTask, 每隔 1 分钟检测配置文件的变化, 可以通过设置 scanPeriod 改变这一默认行为
+   注意: Idea 中需要配置 mvn 启动命令为: -Dlogback.configurationFile=scan.xml jetty:run -f pom.xml
+
+   支持配置 packagingData 支持将 java 异常的堆栈信息打印操作, 1.1.4 之后的版本该功能默认关闭, 可以通过如下的方式开启, 也可以通过如下的代码方式关闭:
+   LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+   lc.setPackagingDataEnabled(true);
+-->
+<configuration packagingData="true" scan="true" scanPeriod="10 seconds">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
