@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener"/>
+
+    <!-- if-then form -->
+   <!-- <if condition="some conditional expression">
+        <then>
+            ...
+        </then>
+    </if>-->
+
+    <!-- if-then-else form -->
+    <!--<if condition="some conditional expression">
+        <then>
+            ...
+        </then>
+        <else>
+            ...
+        </else>
+    </if>-->
+
+    <!--支持表达式, 既一个普通的 java-->
+    <!--  <if condition='1 > 2'>
+        <then>
+            <property name="contextName" value="true"></property>
+        </then>
+        <else>
+            <property name="contextName" value="false"></property>
+        </else>
+    </if>-->
+
+    <!--支持 property() 方法, 简称 p(), 用于读取 local、context、system、os 范围内的变量, 当变量未定义的时候会返回空字符串-->
+    <!--支持 isDefined() 方法, 检查变量名是否已经被定义-->
+    <!--支持 isNull() 方法, 检查变量名是否为null-->
+    <if condition='property("HOSTNAME").length() > 0'>
+        <then>
+            <property name="contextName" value="true"></property>
+        </then>
+        <else>
+            <property name="contextName" value="false"></property>
+        </else>
+    </if>
+
+    <contextName>${contextName}</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %contextName [%t] %level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

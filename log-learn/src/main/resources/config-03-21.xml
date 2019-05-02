@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include file="D:\data\IdeaProjects\java\log-learn\src\main\resources\includedConfig.xml"/>
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

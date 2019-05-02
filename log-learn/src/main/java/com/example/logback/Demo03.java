@@ -224,4 +224,208 @@ public class Demo03 {
         logger.debug("hello world!");
         logger2.debug("hello world2!");
     }
+
+    /**
+     * <p>
+     * logback 中, 所有的 logger 都被附加在一个 logger 上下文下, 在默认情况下, 上下文的名称为 "default", 然而, 如果我们有多个不同的
+     * 的应用同时在打印日志的时候, 这将导致我们难以区分哪条日志是哪个应用打印的, 因此我们可以直接使用 &lt;contextName&gt; 标签直接设置
+     * 当前上下文的名称, 这样就可以不同应用区分开来.
+     * </p>
+     * <strong>注意: &lt;contextName&gt;只允许设置一次, 一旦设计之后就不允许被改变.</strong>
+     */
+    @Test
+    public void test12() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-12.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>Variable substitution</h2>
+     *  <strong>注意:早起的版本被称为 "变量替换", 而不是 "变量", 在后文中提到这两个词表达的其实是一个意思, 但是 "变量" 更能够准确的表达它的实际意思.</strong>
+     *  <p>
+     *     和许多的的脚本语言一样, logback 的配置文件是支持配置 "定义" 和 "替换" 变量的, 并且变量有作用域(下面会介绍), 变量允许在 logback 的配置文件内部定义、
+     *     外部文件定义、在外部资源文件中、外部计算、动态生成等方式.
+     *  </p>
+     *  <p>
+     *      类似于 Unix 的 shell 编程, 我们可以在 &lt;configuration&gt;使用 ${foo} 在替换当前配置文件上下文定义的名称为 "foo" 的变量的值
+     *  </p>
+     *  <p>
+     *      HOSTNAME 和 CONTEXT_NAME 在 logback 启动得时候已经被自动定义到了上下文, 这在很多情况下是很方便的, 考虑到在某些环境中，可能需要
+     *      一些时间来 HOSTNAME，因此会延迟计算其值（仅在需要时）, 当然了, HOSTNAME 的值我们也可以直接声明其值.
+     *  </p>
+     *  <h2>变量声明</h2>
+     *  <p>
+     *      我们可以使用 &lt;property&gt; 或者 &lt;variable&gt;(1.0.7) 之后都可以用于声明变量, 它们的作用是一样的.
+     *  </p>
+     *  <p>
+     *      我们也可以 java -DUSER_HOME="/home/sebastien" MyApp2 的方法将系统级别的变量 USER_HOME, 并且在我们的配置文件中引用.
+     *  </p>
+     */
+    @Test
+    public void test13() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-13.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <p>
+     *     当我们需要再配置文件中声明大量变量的时候, 使用 &lt;property&gt; 或者 &lt;variable&gt; 的方式会显得有些笨拙和不够方便,
+     *     这时我们可以通过引入外部 property 的方式声明变量.
+     * </p>
+     * <h2>变量作用域</h2>
+     * <p>
+     *     logback 可以读取四个访问的变量:
+     *     <ul>
+     *         <li>local(局部变量): 配置文件内部定义, 既 &lt;configuration&gt;元素包含的范围内</li>
+     *         <li>context(logback上下文变量): logback 上下文范围内都能访问的变量</li>
+     *         <li>system(系统级别变量): JVM 定义的变量</li>
+     *         <li>OS(操作系统变量): 既环境变量, 该范围内的变量 logback 只能读, 不能写</li>
+     *     </ul>
+     *     我们可以通过 &lt;property&gt;、&lt;define&gt;、&lt;insertFromJNDI&gt; 的 scope 属性指定其
+     *     声明的变量的作用域, 可以是 local、context、system, 如果没有指定, 默认都是 local 范围的属性.
+     * </p>
+     */
+    @Test
+    public void test14() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-14.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**<h2>变量作用域</h2>
+     * <p>
+     *     logback 可以读取四个访问的变量:
+     *     <ul>
+     *         <li>local(局部变量): 配置文件内部定义, 既 &lt;configuration&gt;元素包含的范围内</li>
+     *         <li>context(logback上下文变量): logback 上下文范围内都能访问的变量</li>
+     *         <li>system(系统级别变量): JVM 定义的变量</li>
+     *         <li>OS(操作系统变量): 既环境变量, 该范围内的变量 logback 只能读, 不能写</li>
+     *     </ul>
+     *     我们可以通过 &lt;property&gt;、&lt;define&gt;、&lt;insertFromJNDI&gt; 的 scope 属性指定其
+     *     声明的变量的作用域, 可以是 local、context、system, 如果没有指定, 默认都是 local 范围的属性.
+     * </p>
+     */
+    @Test
+    public void test15() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-15.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>变量默认值</h2>
+     * <p>
+     *     如果我们在配置文件中使用的变量未定义或者未 null 的时候， 我们可以使用 ${name:-defaultValue} 的方式使用默认值
+     * </p>
+     */
+    @Test
+    public void test16() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-16.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>嵌套变量值</h2>
+     * logback 支持 值嵌套、变量名嵌套、默认值嵌套，用法如下:
+     * <ul>
+     *      <li>值嵌套: ${firstName}.${lastName}</li>
+     *      <li>变量名嵌套: ${xiuchu.${lastName}}(在 properties 文件中使用有效)</li>
+     *      <li>默认值嵌套: ${name:-${defaultValueName}}</li>
+     * </ul>
+     */
+    @Test
+    public void test17() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-17.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>动态变量的值</h2>
+     * <p>
+     *     &lt;define&gt; 标签可以用于定义动态变量, 在声明的时候必须包含两个参数:
+     *     <ul>
+     *         <li>name: 变量名称.</li>
+     *         <li>class: 生成动态变量命的实现类, 必须实现 ch.qos.logback.core.spi.PropertyDefiner 接口.</li>
+     *     </ul>
+     *     &lt;define&gt; 中的子元素的值将会被赋值到其 class 实例的同名属性上, 该 class 同时也必须实现该属性的 setter 方法,
+     *     可以参考: CanonicalHostNamePropertyDefiner、FileExistsPropertyDefiner、ResourceExistsPropertyDefiner 具体实现.
+     *     下面是一个简单的例子.
+     * </p>
+     */
+    @Test
+    public void test18() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-18.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>条件判断</h2>
+     * <p>
+     *     logback 配置文件中我们可以使用类似于 shell 编程中的条件判断, 但是需要引入 Janino library 支持, 实际例子如下:
+     * </p>
+     */
+    @Test
+    public void test19() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-19.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>获取 JNDI 变量</h2>
+     * <p>
+     *     见 config-03-20.xml 中相关说明.
+     * </p>
+     */
+    @Test
+    public void test20() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-20.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>文件包含</h2>
+     * <p>
+     *    logback 支持将引入外部配置文件, 作为配置文件的一部分, 需要使用 &lt;include&gt; 标签, 其中可以包含如下三个属性, 但是只能包含一个:
+     *    <ul>
+     *        <li>file: 外部文件中引入.</li>
+     *        <li>resource: 从资源文件中引入, 既 classpath 路径引入.</li>
+     *        <li>url: 从网络引入.</li>
+     *    </ul>
+     *    如果引入的文件不存在, logback 将会将相关信息以出错的方式输入到启动日志信息中, 如果想要忽略该错误, 可以设置 optional="true" 忽略该错误.
+     * </p>
+     */
+    @Test
+    public void test21() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-21.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
+    /**
+     * <h2>添加 Context Listener</h2>
+     * <p>
+     *      实现了 LoggerContextListener 接口的类可以监听 logger 的生命周期. 用 &lt;contextListener&gt; 标签可以配置相关实现类,
+     *      使用 class 属性指定相关 LoggerContextListener 接口实现.
+     * </p>
+     * <h3>LevelChangePropagator</h3>
+     * <p>
+     *     logback 0.9.25 之后, logback-classic 提供了 LevelChangePropagator 实现类, 该类能够在 logger level 的状态改变的关联到
+     *     java.util.logging 框架中. 该实现可以解决 logger 禁用对系统性能的影响(具体为什么我也不清楚),  LogRecord 的实例将只会发送
+     *     启动的 logger 打印的日志(通过Logback), 这使得我们在实际环境中使用 jul-to-slf4j 桥接 jul 和 slf4j 变得更加合理, 高效.
+     * </p>
+     */
+    @Test
+    public void test22() {
+        System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "config-03-22.xml");
+        Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+        logger.debug("hello world!");
+    }
+
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener"/>
+
+    <define name="now" class="com.example.logback.TimestampPropertyDefiner">
+        <pattern>YYYY年MM月dd日 HH时mm分ss秒</pattern>
+    </define>
+
+    <contextName>logback-test-${now}</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %contextName [%t] %level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

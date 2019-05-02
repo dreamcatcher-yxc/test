@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.OnErrorConsoleStatusListener"/>
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator"/>
+
+    <!--
+        配置 resetJUL = true 可以在 logger 配置被重置的时候, 原来设置的 contextListener 依然有效.
+    -->
+   <!-- <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %contextName [%t] %level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
