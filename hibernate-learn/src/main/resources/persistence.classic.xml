@@ -1,0 +1,43 @@
+<persistence>
+    version = "2.1"
+    xmlns = "http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:shemaLocation = "http://xmlns.jcp.org/xml/ns/persistence
+    http://xmlns.jcp.org/xml/ns/persistence_2_1.xsd"
+    <!--配置持久化单元-->
+    <persistence_unit name = "HelloWorldPU">
+        <!--数据库连接 Jta-data-source和 non-jta-data-source用于分别指定持久化提供商使用的JTA和/或non-JTA数据源的全局JNDI名称(可选)-->
+        <jta-data-source>myDS</jta-data-source>
+        <!-- 声明orm.xml所在位置.即指定映射文件 (可选) -->
+        <mapping-file>product.xml</mapping-file>
+
+        <!-- 以包含persistence.xml的jar文件为基准的相对路径,添加额外的jar文件.指定托管类的附加JAR(可选) -->
+        <jar-file>../lib/model.jar</jar-file>
+
+        <!--持久化类-->
+        <class>com.lzb.mitan</class>
+
+        <!--为映射的类禁用扫描-->
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <!--设置属性-->
+        <properties>
+            <!--自动输出schema创建DDL语句 value的值可以是 create-drop / create / update
+值得注意的是create-drop他会在SESSION关闭后删除所有表开启式再创建。 -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.show_sql" value="true" />
+
+            <!--删除/重建SQL架构-->
+            <property
+                    name = "javax.persistence.schema-generation.database.action"
+                    value = "drop-and-create"/>
+            <!--格式化SQL-->
+            <property
+                    name = "hibernate.format_sql" value = "true"/>
+
+            <property
+                    name = "hibernate.use_sql_comments" value = "true"/>
+
+        </properties>
+    </persistence_unit>
+</persistence>

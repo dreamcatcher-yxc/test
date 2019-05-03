@@ -1,0 +1,71 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="demo1">
+        <description>
+            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
+        </description>
+
+        <class>com.example.entity2.Event</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+
+    </persistence-unit>
+
+    <persistence-unit name="demo2">
+        <description>
+            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
+        </description>
+
+        <class>com.example.hibernate.JPADemo2$Person</class>
+        <class>com.example.hibernate.JPADemo2$Book</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+
+    </persistence-unit>
+
+    <persistence-unit name="demo3">
+        <description>
+            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
+        </description>
+
+        <class>com.example.hibernate.JPADemo3$Person</class>
+        <class>com.example.hibernate.JPADemo3$Book</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;MVCC=TRUE" />
+            <property name="javax.persistence.jdbc.user" value="sa" />
+            <property name="javax.persistence.jdbc.password" value="" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
