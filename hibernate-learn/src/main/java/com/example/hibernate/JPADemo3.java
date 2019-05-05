@@ -78,7 +78,7 @@ public class JPADemo3 extends JPATestBase {
     }
 
     public void test02() {
-        test01();
+//        test01();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
