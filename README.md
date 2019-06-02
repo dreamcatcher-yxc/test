@@ -14,5 +14,6 @@
 - spring-security-integration-demo: spring-security 各种方式安全验证示例.
 - shiro: shiro 安全框架学习相关代码.
 - logback-learn: logback 前三章学习代码.
+- springcloud: Spring Could 学习代码.
 
 > 问题: gradle-multi-module-project 打包成 jar 包之后无法启动, 待解决。
