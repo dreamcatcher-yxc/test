@@ -20,13 +20,32 @@
     </parent>
 
     <modules>
+        <!-- 统一的服务注册中心, 子模块需要注册服务都可以使用该模块 -->
         <module>eureka-server</module>
+
+        <!-- 服务 -->
         <module>service-hi</module>
+
+        <!-- 演示使用 ribbo 实现服务的调用, 集成了 hystrix 作为断路器 -->
         <module>service-ribbo</module>
+
+        <!-- 演示使用 feign 实现服务的调用, 集成了 hystrix 作为断路器 -->
         <module>service-feign</module>
+
+        <!-- 演示使用 zuul 作为网关服务 -->
         <module>service-zuul</module>
+
+        <!-- 非集群版分布式配置 -->
         <module>config-server</module>
         <module>config-client</module>
+
+        <!-- 集群版分布式配置 -->
+        <module>cluster-config-server</module>
+        <module>cluster-config-client</module>
+
+        <!-- 分布式服务调用跟踪演示 -->
+        <module>zipkin-service-hi</module>
+        <module>zipkin-service-miya</module>
     </modules>
 
     <properties>
