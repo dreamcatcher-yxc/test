@@ -1,4 +1,4 @@
-package com.forezp.ccs;
+package com.forezp.cbcs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableConfigServer
 @EnableDiscoveryClient
 @EnableEurekaClient
-public class ClusterConfigServerApplication {
+public class ClusterBusConfigServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ClusterConfigServerApplication.class, args);
+		SpringApplication.run(ClusterBusConfigServerApplication.class, args);
 	}
 }

@@ -64,6 +64,10 @@ public class ClusterConfigServerApplication {
 	}
 }
  ```
+
+> 该工程配合 cluster-bus-config-client 演示使用
+ 
+ 
  
  
  

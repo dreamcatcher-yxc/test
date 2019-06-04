@@ -46,6 +46,9 @@
         <!-- 分布式服务调用跟踪演示 -->
         <module>zipkin-service-hi</module>
         <module>zipkin-service-miya</module>
+
+        <module>cluster-bus-config-client</module>
+        <module>cluster-bus-config-server</module>
     </modules>
 
     <properties>
