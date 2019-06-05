@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 // 指定调用超时返回信息
-@FeignClient(value = "service-hi", fallback = SchedualServiceHiHystric.class)
+@FeignClient(value = "service-hi", fallback = ScheduleServiceHiHystrix.class)
 public interface ScheduleServiceHi {
 
     @RequestMapping(value = "/hi", method = RequestMethod.GET)

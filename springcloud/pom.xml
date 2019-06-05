@@ -22,6 +22,8 @@
     <modules>
         <!-- 统一的服务注册中心, 子模块需要注册服务都可以使用该模块 -->
         <module>eureka-server</module>
+        <!-- 及集群版注册中心 -->
+        <module>cluster-eureka-server</module>
 
         <!-- 服务 -->
         <module>service-hi</module>
@@ -47,8 +49,12 @@
         <module>zipkin-service-hi</module>
         <module>zipkin-service-miya</module>
 
+        <!-- 总线测试 -->
         <module>cluster-bus-config-client</module>
         <module>cluster-bus-config-server</module>
+
+        <!-- hystrix dashboard 测试-->
+        <module>hystrix-dashboard-service-hi</module>
     </modules>
 
     <properties>
