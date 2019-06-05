@@ -59,6 +59,10 @@
 
         <!-- Hystrix Turbine, 将每个服务Hystrix Dashboard数据进行了整合 -->
         <module>service-turbine</module>
+
+        <!-- Spring Cloud Gateway: 第二代网关框架, 用于取代 zuul -->
+        <module>gateway/service-gateway</module>
+        <module>gateway/service-gateway-predicate</module>
     </modules>
 
     <properties>
