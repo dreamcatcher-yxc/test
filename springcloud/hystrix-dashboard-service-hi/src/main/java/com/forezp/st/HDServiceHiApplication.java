@@ -1,4 +1,4 @@
-package com.forezp.hdsh;
+package com.forezp.st;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Value;

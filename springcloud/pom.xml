@@ -55,6 +55,10 @@
 
         <!-- hystrix dashboard 测试-->
         <module>hystrix-dashboard-service-hi</module>
+        <module>hystrix-dashboard-service-lucy</module>
+
+        <!-- Hystrix Turbine, 将每个服务Hystrix Dashboard数据进行了整合 -->
+        <module>service-turbine</module>
     </modules>
 
     <properties>

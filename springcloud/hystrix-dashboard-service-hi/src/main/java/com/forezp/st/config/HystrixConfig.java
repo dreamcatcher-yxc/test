@@ -1,4 +1,4 @@
-package com.forezp.hdsh.config;
+package com.forezp.st.config;
 
 import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
