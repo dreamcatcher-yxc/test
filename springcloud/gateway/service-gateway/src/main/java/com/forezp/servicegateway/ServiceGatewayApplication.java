@@ -1,4 +1,4 @@
-package com.forezp.servicegateway;
+package com.forezp.sgp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

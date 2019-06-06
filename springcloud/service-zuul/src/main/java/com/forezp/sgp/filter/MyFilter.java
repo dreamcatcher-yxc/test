@@ -1,4 +1,4 @@
-package com.forezp.servicegateway.filter;
+package com.forezp.sgp.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
