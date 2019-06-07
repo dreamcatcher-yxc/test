@@ -1,7 +1,0 @@
-server:
-  port: 8988
-spring:
-  zipkin:
-    base-url: http://192.168.11.133:9411
-  application:
-    name: service-hi
