@@ -15,7 +15,16 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
+        <!--
+            除去 spring-boot-admin 下的项目, 其他项目在 2.0.3.RELEASE 版本下均能正常工作.
+        -->
+        <!-- <version>2.0.3.RELEASE</version>-->
+
+        <!--
+            由于 spring-boot-admin 版本号为 2.1.0, 与 2.0.3.RELEASE 不兼容, 在测试 spring-boot-admin 下的
+            项目的时候需要使用如下的版本.
+        -->
+        <version>2.1.0.RELEASE</version>
         <relativePath/>
     </parent>
 
@@ -63,6 +72,19 @@
         <!-- Spring Cloud Gateway: 第二代网关框架, 用于取代 zuul -->
         <module>gateway/service-gateway</module>
         <module>gateway/service-gateway-predicate</module>
+        <module>gateway/service-gateway-filter</module>
+        <module>gateway/service-gateway-current-limiting</module>
+        <module>gateway/service-gateway-cloud</module>
+
+        <!-- spring-boot-admin-demo -->
+        <!-- spring-boot 版 -->
+        <module>spring-boot-admin/spring-boot-admin-server</module>
+        <module>spring-boot-admin/spring-boot-admin-client</module>
+
+        <!-- spring-cloud 版 -->
+        <module>spring-boot-admin/spring-boot-admin-eureka-server</module>
+        <module>spring-boot-admin/spring-boot-admin-server-cloud</module>
+        <module>spring-boot-admin/spring-boot-admin-client-cloud</module>
     </modules>
 
     <properties>
@@ -70,6 +92,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <spring-boot-admin.version>2.1.0</spring-boot-admin.version>
     </properties>
 
     <dependencies>
