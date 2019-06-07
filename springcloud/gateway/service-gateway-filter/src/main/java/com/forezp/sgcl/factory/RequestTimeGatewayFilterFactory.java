@@ -1,4 +1,4 @@
-package com.forezp.sgp.factory;
+package com.forezp.sgcl.factory;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

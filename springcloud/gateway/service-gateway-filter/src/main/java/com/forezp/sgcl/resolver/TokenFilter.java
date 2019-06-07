@@ -1,4 +1,4 @@
-package com.forezp.sgp.filter;
+package com.forezp.sgcl.resolver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.forezp.sgp.filter;
+package com.forezp.sgcl.resolver;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;

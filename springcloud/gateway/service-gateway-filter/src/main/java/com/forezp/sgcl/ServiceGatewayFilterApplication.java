@@ -1,8 +1,8 @@
-package com.forezp.sgp;
+package com.forezp.sgcl;
 
-import com.forezp.sgp.factory.RequestTimeGatewayFilterFactory;
-import com.forezp.sgp.filter.RequestTimeFilter;
-import com.forezp.sgp.filter.TokenFilter;
+import com.forezp.sgcl.factory.RequestTimeGatewayFilterFactory;
+import com.forezp.sgcl.resolver.RequestTimeFilter;
+import com.forezp.sgcl.resolver.TokenFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;

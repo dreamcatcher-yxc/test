@@ -1,4 +1,4 @@
-package com.forezp.sgp.filter;
+package com.forezp.sgcl.resolver;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
