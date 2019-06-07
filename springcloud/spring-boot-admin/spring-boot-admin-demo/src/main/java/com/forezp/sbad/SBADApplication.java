@@ -1,22 +1,20 @@
-package com.forezp.sgc;
+package com.forezp.sgcl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @SpringBootApplication
-@EnableEurekaClient
 @RestController
-public class ServiceGatewayCloudApplication {
+public class SBADApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServiceGatewayCloudApplication.class, args);
+        SpringApplication.run(SBADApplication.class, args);
     }
 
     // tag::route-locator[]
