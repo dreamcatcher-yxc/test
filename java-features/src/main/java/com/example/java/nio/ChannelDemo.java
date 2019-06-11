@@ -23,11 +23,13 @@ public class ChannelDemo {
         ByteBuffer buff = ByteBuffer.allocate(64);
         // 向缓冲区里面写入数据
         int bytesRead = channel.read(buff);
+
         while (bytesRead != -1) {
             /**
              * 将 buffer 从写模式转换为读模式, 该操作会导致 buffer 的 limit 置为 position, position 置为 0.
              */
             buff.flip();
+
             while (buff.hasRemaining()) {
                 System.out.println((char)buff.get());
             }
@@ -40,6 +42,7 @@ public class ChannelDemo {
             buff.clear();
             bytesRead = channel.read(buff);
         }
+
         aFile.close();
     }
 
@@ -52,6 +55,8 @@ public class ChannelDemo {
         FileInputStream in = new FileInputStream("D:/hadoop-tmp/word.txt");
         FileChannel channel = in.getChannel();
         ByteBuffer buff = ByteBuffer.allocate(64);
+
+        // 通过 channel 向 buffer 中写数据
         while (channel.read(buff) > 0) {
             buff.flip();
             byte[] tbs = new byte[buff.limit()];
@@ -59,6 +64,7 @@ public class ChannelDemo {
             System.out.println(new String(tbs));
             buff.clear();
         }
+
         in.close();
     }
 
@@ -75,11 +81,14 @@ public class ChannelDemo {
         buff.put((byte)'l');
         buff.put((byte)'o');
 
+        // 转换为读模式, limit 设置为 position, position 设置为 0.
         buff.flip();
         System.out.println(String.format("position is %d, data is %s", buff.position(), (char)buff.get()));
         System.out.println(String.format("position is %d, data is %s", buff.position(), (char)buff.get()));
         System.out.println(String.format("position is %d, data is %s", buff.position(), (char)buff.get()));
 
+        // 将未读取到的数据拷贝到 buffer 的起始处, 然后将position设到最后一个未读元素正后面, 此处最后两个字母 'l'、'o' 还
+        // 没有读取, 所以拷贝到了 buffer 的 0、1 位置, position 设置到两位之后, 所以值为 2。
         buff.compact();
         System.out.println(String.format("position is %d", buff.position()));
         System.out.println((char)buff.get(0));

@@ -3,18 +3,61 @@ package com.example.java.nio;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.DatagramChannel;
-import java.nio.channels.Pipe;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
+import java.nio.file.Paths;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ChannelDemo02 {
 
     @Test
     public void testSelector01() throws IOException {
+        Selector selector = Selector.open();
 
+        SocketChannel channel = SocketChannel.open();
+        channel.configureBlocking(false); // 不允许阻塞
+        channel.connect(new InetSocketAddress("127.0.0.1", 8888));
+//        channel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_ACCEPT | SelectionKey.OP_CONNECT | SelectionKey.OP_WRITE);
+        channel.register(selector, SelectionKey.OP_ACCEPT);
+
+        Set selectedKeys;
+
+        while (true) {
+            selectedKeys = selector.selectedKeys();
+
+            if(selectedKeys.size() > 0) {
+                break;
+            }
+        }
+
+        Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
+
+        while(keyIterator.hasNext()) {
+            SelectionKey key = keyIterator.next();
+
+            if(key.isAcceptable()) {
+
+                // a connection was accepted by a ServerSocketChannel.
+                System.out.println("acceptable");
+            } else if (key.isConnectable()) {
+
+                // a connection was established with a remote server.
+                System.out.println("connectable");
+            } else if (key.isReadable()) {
+
+                // a channel is ready for reading
+                System.out.println("readable");
+            } else if (key.isWritable()) {
+
+                // a channel is ready for writing
+                System.out.println("writable");
+            }
+
+            keyIterator.remove();
+        }
     }
 
     /**
@@ -29,6 +72,7 @@ public class ChannelDemo02 {
         channel.connect(new InetSocketAddress("127.0.0.1", 8888));
         // 创建大小为 1024 个字节的缓冲区
         ByteBuffer buff = ByteBuffer.allocate(1024);
+
         while (channel.read(buff) != -1) {
             buff.flip();
             byte[] tbs = new byte[buff.limit()];
@@ -36,6 +80,7 @@ public class ChannelDemo02 {
             System.out.print(new String(tbs));
             buff.clear();
         }
+
         channel.close();
     }
 
@@ -56,6 +101,7 @@ public class ChannelDemo02 {
         while(true) {
             // 由于配置的是非阻塞式, 此处不会阻塞，如果没有新的连接接入，会返回 null
             SocketChannel socketChannel = serverSocketChannel.accept();
+
             if(socketChannel != null) {
                 System.out.println("new connected...");
                 // do something with socketChannel
