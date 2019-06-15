@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link type="text/css" href="https://cdn.bootcss.com/iview/3.4.2-rc.1/styles/iview.css" rel="stylesheet">
+    <title>聊天室</title>
+</head>
+<body>
+
+<div style="margin-top: 20px" id="app">
+    <i-form :model="formData" :label-width="80">
+        <form-item label="内容">
+            <i-input :value="naturalMsgs" type="textarea" :autosize="{minRows: 20, maxRows: 100}" readonly placeholder="无消息..."></i-input>
+        </form-item>
+        <form-item label="消息">
+            <i-input v-model="formData.input" placeholder="输入消息"></i-input>
+        </form-item>
+        <form-item>
+            <i-button type="primary" @click="send">发送</i-button>
+            <i-button style="margin-left: 8px" @click="close">关闭连接</i-button>
+        </form-item>
+    </i-form>
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/iview/3.4.2-rc.1/iview.js"></script>
+
+<script type="text/javascript">
+
+    new Vue({
+        data : {
+            formData : {
+                address : '',
+                port : '',
+                content : '',
+                input : ''
+            },
+            ws : null,
+            msgs : []
+        },
+
+        computed : {
+            naturalMsgs() {
+                return this.msgs.join('\r\n');
+            }
+        },
+
+        mounted() {
+            if ("WebSocket" in window)
+            {
+                // 打开一个 web socket
+                // 此处输入
+                this.ws = new WebSocket(`ws://localhost:8888/ws`);
+
+                this.ws.onopen = () => {
+                    // Web Socket 已连接上，使用 send() 方法发送数据
+                    this.onopen();
+                };
+
+                this.ws.onmessage = (evt) => {
+                    this.onmessage(evt);
+                };
+
+                this.ws.onclose = () => {
+                   this.onclose();
+                };
+            } else {
+                this.$Message.error('您的浏览器不支持 websocket');
+            }
+        },
+
+        methods : {
+            show() {
+                this.$Message.success('hello iview!');
+            },
+
+            onopen() {
+                this.msgs.push('连接成功');
+            },
+
+            onmessage(evt) {
+                this.msgs.push(evt.data);
+            },
+
+            onclose() {
+                this.msgs.push('连接断开');
+            },
+
+            send() {
+                console.log('send...');
+                this.ws.send(this.formData.input);
+                this.formData.input = '';
+            },
+
+            close() {
+                this.ws.close();
+            }
+        }
+    }).$mount('#app');
+</script>
+
+</body>
+</html>
