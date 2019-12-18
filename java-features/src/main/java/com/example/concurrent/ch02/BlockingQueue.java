@@ -3,9 +3,9 @@ package com.example.concurrent.ch02;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BlockingQueue {
+public class BlockingQueue<T> {
 
-    private List queue = new LinkedList();
+    private List<T> queue = new LinkedList<>();
 
     private int limit = 10;
 
@@ -13,10 +13,8 @@ public class BlockingQueue {
         this.limit = limit;
     }
 
-    public synchronized void enqueue(Object item)
-
+    public synchronized void enqueue(T item)
             throws InterruptedException {
-
         while (this.queue.size() == this.limit) {
             wait();
         }
@@ -28,7 +26,7 @@ public class BlockingQueue {
         this.queue.add(item);
     }
 
-    public synchronized Object dequeue()
+    public synchronized T dequeue()
 
             throws InterruptedException {
 
