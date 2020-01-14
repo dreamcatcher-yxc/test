@@ -32,7 +32,7 @@ public class LockTests {
     public static void fairLockTest() throws Exception {
         FairLock lock = new FairLock(); // 创建一把锁
 
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 2; i++) {
             final String threadName = "thread-" + (char)(65 + i);
 
             new Thread(() -> {

@@ -9,7 +9,7 @@ public class MyWaitNotify3 {
 
     public void doWait() {
         synchronized (myMonitorObject) {
-            // 如果还没有被通知, 则等待
+            // 如果还没有被通知, 则等待, 俗称自旋锁
             while (!wasSignalled) {
                 try {
                     System.out.println("before " + Thread.currentThread().getName() + " wait...");

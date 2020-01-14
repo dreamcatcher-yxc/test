@@ -40,19 +40,23 @@ public class FairLock {
             }
 
             // <1>;
-            // 此部分不能放在同步块中, 若放在同步块中, 会有多个线程同时等待获取该锁, 多线程环境下会出现死锁。
-            // 如: A 现在持有此锁, A 会退出方法, A 释放锁。此时 B 尝试获取该锁, 则会等待(等待期间持有锁),
-            // 此时 A 延迟一段时间再释放锁, 调用 unlock, unlock 为同步块, 需要获取锁, 则会等待, 因为已经
-            // 被 A 持有, 而 B 因为调用了 doWait 方法, 需要依赖 A 的 unlock 方法中调用 doNotify 方法唤醒,
-            // 因此造成死锁.
-            try {
-                System.out.println(Thread.currentThread().getName() + " 获取锁失败, 等待锁释放...");
-                queueObject.doWait();
-                System.out.println(Thread.currentThread().getName() + " 获得锁, 继续执行...");
-            } catch (InterruptedException e) {
-                synchronized(this) { waitingThreads.remove(queueObject); }
-                throw e;
-            }
+            // 此部分不能放在同步块中, 既不能 synchronized (this) { }  若放在同步块中, 会有多个线程同时等待获取该锁,
+            // 多线程环境下会出现死锁，这种死锁属于嵌套导致的死锁。
+            // eg: 当前有两个线程(A、B)使用此锁，名称为 lock, 加入此时 A 线程先获得锁，则有 A{ lock.lock() }, 此时
+            // A{ Thread.sleep(1000); // 休眠一秒 }, B 执行 B{ lock.lock(); } 此时 B 会被挂起! 注意, 此时 B 线程
+            // 执行下面的代码, 会造成 lock 被锁住(注意: 属于 B 线程的 queueObject 不会被锁住!), 1S 之后, A 线程
+            // 苏醒, 执行 A{ lock.unlock(); }, 此时需要 A 需要被 B 线程持有的 lock 释放锁, 而 B 线程释放锁的条件是
+            // A 线程释放 lock, 从而导致了死锁。
+//            synchronized (this) {
+                try {
+                    System.out.println(Thread.currentThread().getName() + " 获取锁失败, 等待锁释放...");
+                    queueObject.doWait();
+                    System.out.println(Thread.currentThread().getName() + " 获得锁, 继续执行...");
+                } catch (InterruptedException e) {
+                    synchronized(this) { waitingThreads.remove(queueObject); }
+                    throw e;
+                }
+//            }
         }
     }
 
