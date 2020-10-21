@@ -12,7 +12,7 @@
         <jetty.version>9.3.9.v20160517</jetty.version>
         <javax-servlet.version>3.1.0</javax-servlet.version>
         <logback.version>1.2.3</logback.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <janino.version>3.0.6</janino.version>
         <jansi.version>1.8</jansi.version>
     </properties>
