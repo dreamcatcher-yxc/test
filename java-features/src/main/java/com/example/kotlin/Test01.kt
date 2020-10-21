@@ -1,5 +1,5 @@
-//package com.example.kotlin
-//
-//fun main() {
-//    println("hello world!");
-//}
+package com.example.kotlin
+
+fun main() {
+    println("hello world!");
+}
